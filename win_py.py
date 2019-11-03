@@ -8,7 +8,9 @@ class PyTest:
         self.tab_py = ttk.Frame(self.tab)
         self.tab.add(self.tab_py, text='Python')
         self.var_in = tk.IntVar()
+        self.var_in.set(0)
         self.var_out = tk.IntVar()
+        self.var_out.set(0)
         self.creatViget()
         self.bindButton()
         self.gridVidgets()
@@ -16,11 +18,11 @@ class PyTest:
     def creatViget(self):
         self.lab_in = tk.Label(self.tab_py, text="select input", font="Arial 12")
 
-        self.rb_input_h = tk.Radiobutton(self.tab_py, text="horisontal", variable=self.var_in, value=1)
-        self.rb_input_v = tk.Radiobutton(self.tab_py, text="vertikal", variable=self.var_in, value=2)
+        self.rb_input_h = tk.Radiobutton(self.tab_py, text="horisontal", variable=self.var_in, value=0)
+        self.rb_input_v = tk.Radiobutton(self.tab_py, text="vertikal", variable=self.var_in, value=1)
         self.lab_out = tk.Label(self.tab_py, text="select output", font="Arial 12")
-        self.rb_out_h = tk.Radiobutton(self.tab_py, text="horizontal", variable=self.var_out, value=1)
-        self.rb_out_v = tk.Radiobutton(self.tab_py, text="vertikal", variable=self.var_out, value=2)
+        self.rb_out_h = tk.Radiobutton(self.tab_py, text="horizontal", variable=self.var_out, value=0)
+        self.rb_out_v = tk.Radiobutton(self.tab_py, text="vertikal", variable=self.var_out, value=1)
 
         self.label_prog_dir = tk.Label(self.tab_py, text="slect directory students")
         self.ent_prog_dir = tk.Entry(self.tab_py)
@@ -49,6 +51,14 @@ class PyTest:
     def bindButton(self):
         self.button_select_st.bind('<Button-1>', self.selectDirFiles)
         self.button_select_case.bind('<Button-1>', self.selctDirTests)
+        self.button_start.bind('<Button-1>', self.printTest)
+
+    def printTest(self, event):
+        print(self.var_in.get())
+        print(self.var_out.get())
+
+
+
     def selectDirFiles(self, event):
         os2 = askdirectory()
         self.ent_prog_dir.delete(0, tk.END)
@@ -61,5 +71,8 @@ class PyTest:
     def packTab(self):
         self.tab.pack(expand=1, fill='both')
 
-
+class FileTst(PyTest):
+    def __init__(self, tab):
+        PyTest.__init__(self, tab)
+        self.tab.add(self.tab_py, text='EXE')
 

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-from win_py import PyTest
-from win_exe import FileTst
+from win_py import PyTest, FileTst
+
 
 class Win:
     def __init__(self, g_with, g_higth):
